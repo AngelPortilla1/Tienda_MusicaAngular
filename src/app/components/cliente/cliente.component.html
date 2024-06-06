@@ -1,0 +1,87 @@
+
+<div class="container h-100 d-flex justify-content-center align-items-center">
+    <div class="text-center">
+        <h1 class="titulo">
+            TIENDA MUSICA 
+        </h1>
+    </div>
+</div>
+<div class="container mt-5"> 
+    <div class="row">
+        <div class="row mt-4">
+            <div class="col-lg-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="titulo">{{accion |uppercase}}</h5>
+                        <form [formGroup]="formCliente" (ngSubmit)="AddCliente();" action="">
+                            
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-user-plus" 
+                                        [class.green-icon]="this.formCliente.get('nombre')?.valid"
+                                        [class.red-icon]="this.formCliente.get('nombre')?.invalid && this.formCliente.get('nombre')?.touched"></i>
+                                </span>
+                                <input formControlName="nombre" minlength="1" maxlength="30" type="text" class="form-control" placeholder="nombre">
+                              </div>
+    
+                              <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-user"
+                                    [class.green-icon]="this.formCliente.get('apellido')?.valid"
+                                    [class.red-icon]="this.formCliente.get('apellido')?.invalid && this.formCliente.get('apellido')?.touched"></i>
+                                </span>
+                                <input formControlName="apellido" maxlength="30" type="text" class="form-control" placeholder="apellido">
+                              </div>
+    
+                              <div class="row">
+                                  <div class="col-lg-7">
+                                    <div class="input-group input-group-lg mb-3">
+                                        <span class="input-group-text">
+                                            <i class="fa-solid fa-envelope"
+                                                [class.green-icon]="this.formCliente.get('correoelectronico')?.valid"
+                                                [class.red-icon]="this.formCliente.get('correoelectronico')?.invalid && this.formCliente.get('correoelectronico')?.touched"></i>
+                                        </span>
+                                        <input formControlName="correoelectronico" maxlength="50" type="text" class="form-control" placeholder="correo electronico">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-5">
+                                    <div class="input-group input-group-lg mb-3">
+                                        <span class="input-group-text">
+                                            <i class="fa-solid fa-globe"
+                                            [class.green-icon]="this.formCliente.get('pais')?.valid"
+                                            [class.red-icon]="this.formCliente.get('pais')?.invalid && this.formCliente.get('pais')?.touched"></i>
+                                        </span>
+                                        <input formControlName="pais"  maxlength="30" type="text" class="form-control" placeholder="pais">
+                                      </div>
+                                  </div>
+                              </div>
+                              <button [disabled]="this.formCliente.invalid" type="submit" class="btn btn-success btn-lg">
+                                <i class="fa-solid fa-database"></i>&nbsp; {{accion |uppercase}}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="titulo">LISTA CLIENTES</h5>
+                        <table class="table">
+                            <tbody> 
+                                <tr *ngFor="let cliente of listaclientes; let i = index">
+                                    <td>{{cliente.idCliente }}</td>
+                                    <td>{{cliente.nombre}}</td>
+                                    <td>{{cliente.apellido }}</td>
+                                    <td>{{cliente.pais }}</td>
+                                    <td>{{cliente.correoElectronico }}</td>
+                                    <td><img  src="assets/Images/icono_persona.png" class="image_usuario"></td>
+                                    <td><i (click)="editarCliente(cliente);" class="far fa-solid fa-pencil text-info"></i></td>
+                                    <td><i (click)="confirmarEliminacion(cliente.idCliente);" class="far fa-solid fa-trash-can text-danger"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

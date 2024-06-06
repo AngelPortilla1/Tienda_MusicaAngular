@@ -1,0 +1,36 @@
+.image_usuario{
+    width: 20px; 
+    height: 25px
+}
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+.titulo {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.titulo:hover {
+    transform: scale(1.05);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .titulo {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .titulo {
+        font-size: 1.5rem;
+    }
+}
