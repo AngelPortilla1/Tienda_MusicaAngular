@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from 'src/app/service/cliente.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cliente',
@@ -38,9 +39,22 @@ export class ClienteComponent implements OnInit {
       pais : this.formCliente.get('pais')?.value,
       
     }
+    // Verifica si el cliente ya existe en la lista
+    const clienteExiste = this.listaclientes.some(c => 
+      c.nombre.toLowerCase() === cliente.nombre.toLowerCase() && 
+      c.apellido.toLowerCase() === cliente.apellido.toLowerCase()
+    );
+
+    if (clienteExiste) {
+      console.log("El cliente ya existe");
+      // Puedes mostrar una notificación o mensaje de error al usuario aquí
+      return;
+    }
+
     //add Cliente
     if(this.id == undefined)
     {
+     // this.listaclientes(x=>x.nombre==this.nombre)
       //add Cliente
       this._clienteService.guardarCliente(cliente).subscribe(data =>{
         //this.toastr.success('se agrego la tarjeta con exito', 'Correcto');
@@ -58,7 +72,7 @@ export class ClienteComponent implements OnInit {
     this.formCliente = this.fb.group({
       nombre: ['',[Validators.required, Validators.maxLength(30), Validators.minLength(1)]],
       apellido:['',[Validators.required, Validators.maxLength(30), Validators.minLength(1)]],
-      correoelectronico:['',[Validators.required, Validators.maxLength(50), Validators.minLength(10)]],
+      correoelectronico:['',[Validators.required, Validators.email]],
       pais:['',[Validators.required, Validators.maxLength(30), Validators.minLength(3)]],
     });
   }
@@ -79,11 +93,20 @@ export class ClienteComponent implements OnInit {
 
     }
 
-    confirmarEliminacion(idCliente: number): void {
-      if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
+confirmarEliminacion(idCliente: number): void {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Estás seguro de que deseas eliminar este cliente?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'No, cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.eliminarCliente(idCliente);
       }
-    }
+    });
+  }
   eliminarCliente(idCliente: number): void 
   {
     this._clienteService.deleteCliente(idCliente).subscribe(() => {

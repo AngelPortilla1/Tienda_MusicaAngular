@@ -18,6 +18,7 @@ body, html {
     transition: transform 0.3s ease, background 0.3s ease;
 }
 
+
 .titulo:hover {
     transform: scale(1.05);
     background: rgba(0, 0, 0, 0.5);
@@ -34,3 +35,7 @@ body, html {
         font-size: 1.5rem;
     }
 }
+
+
+
+
