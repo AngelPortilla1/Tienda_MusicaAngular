@@ -28,8 +28,13 @@ export class ClienteService {
     console.log("Ruta->",this.myAppUrl + this.myApiUrl + cliente);
     return this.http.post(this.myAppUrl+this.myApiUrl, cliente);
   }
+
   actualizarCliente(id: number, cliente: any): Observable<any> {
-    return this.http.put(this.myAppUrl + this.myApiUrl + id, cliente);
+    const url = `${this.myAppUrl}${this.myApiUrl}${id}`;
+    console.log('URL de actualización:', url);
+    console.log('Datos del cliente a actualizar:', cliente);
+    return this.http.put(url, cliente);
   }
+  
 
 }
