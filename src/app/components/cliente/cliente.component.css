@@ -17,6 +17,10 @@ body, html {
     background: rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, background 0.3s ease;
 }
+/* Clase personalizada para el icono de edición verde */
+.text-green {
+    color: #28a745 !important; /* Color verde */
+}
 
 
 .titulo:hover {
@@ -34,6 +38,73 @@ body, html {
     .titulo {
         font-size: 1.5rem;
     }
+}
+input.ng-touched.ng-invalid {
+    border-color: red;
+  }
+  
+  input.ng-touched.ng-valid {
+    border-color: green;
+  }
+  
+  small {
+    color: red;
+  }
+
+  /* Nuevos estilos para cambiar la fuente */
+.feedback-text {
+    font-family: "Play", sans-serif;
+    font-size: 14px; 
+    position: relative;
+    top: -20px; 
+}
+
+
+/* Estilo de los campos de entrada */
+.form-control {
+    font-family: "Bebas Neue", sans-serif; /* Fuente específica para los campos de entrada */
+    border: 1px solid #ced4da; /* Borde gris */
+    border-radius: 5px; /* Esquinas redondeadas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    font-size: 20px; /* Tamaño de fuente */
+}
+
+/* Estilo de los botones */
+.btn {
+    background-color: #3e6894; /* Color de fondo azul */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Esquinas redondeadas */
+    color: white; /* Texto blanco */
+    padding: 10px 20px; /* Espacio interior */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: background-color 0.3s; /* Transición suave */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+
+.btn:hover {
+    background-color: #0056b3; /* Color de fondo azul oscuro al pasar por encima */
+}
+
+/* Asegura que todos los iconos tengan el mismo tamaño */
+.input-group-text i {
+    font-size: 1.5rem; 
+    width: 24px; 
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  /* Clase personalizada para cambiar la fuente del contenedor específico */
+.custom-font {
+        font-family: "Turret Road", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+      
+}
+.scrollable-container { /*Desplazamiento Vertical */
+    max-height: 410px; 
+    overflow-y: auto; 
 }
 
 

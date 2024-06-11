@@ -32,6 +32,7 @@ export class ClienteComponent implements OnInit {
   }
   AddCliente(): void {
     if (this.formCliente.invalid) {
+      this.formCliente.markAllAsTouched();  // Marca todos los controles como "touched"
         return;
     }
 

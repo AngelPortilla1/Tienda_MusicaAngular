@@ -12,9 +12,10 @@
             <div class="col-lg-5">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="titulo">{{accion |uppercase}}</h5>
+                        <h5 class="titulo">{{accion | uppercase}}</h5>
                         <form [formGroup]="formCliente" (ngSubmit)="AddCliente();" action="">
                             
+                            <!-- Nombre Campo -->
                             <div class="input-group input-group-lg mb-3">
                                 <span class="input-group-text">
                                     <i class="fa-solid fa-user-plus" 
@@ -22,49 +23,72 @@
                                         [class.red-icon]="this.formCliente.get('nombre')?.invalid && this.formCliente.get('nombre')?.touched"></i>
                                 </span>
                                 <input formControlName="nombre" minlength="1" maxlength="30" type="text" class="form-control" placeholder="nombre">
-                              </div>
-    
-                              <div class="input-group input-group-lg mb-3">
+                            </div>
+                            <div *ngIf="formCliente.get('nombre')?.touched && formCliente.get('nombre')?.invalid">
+                                <small *ngIf="formCliente.get('nombre')?.errors?.['required']" class="text-danger feedback-text">El nombre es requerido.</small>
+                                <small *ngIf="formCliente.get('nombre')?.errors?.['minlength']" class="text-danger feedback-text">El nombre debe tener al menos 1 caracter.</small>
+                                <small *ngIf="formCliente.get('nombre')?.errors?.['maxlength']" class="text-danger feedback-text">El nombre puede tener hasta 30 caracteres.</small>
+                                <small *ngIf="formCliente.get('nombre')?.errors?.['pattern']" class="text-danger feedback-text">El nombre solo puede contener letras y espacios.</small>
+                            </div>
+
+                            <!-- Apellido Campo -->
+                            <div class="input-group input-group-lg mb-3">
                                 <span class="input-group-text">
-                                    <i class="fa-solid fa-user"
-                                    [class.green-icon]="this.formCliente.get('apellido')?.valid"
-                                    [class.red-icon]="this.formCliente.get('apellido')?.invalid && this.formCliente.get('apellido')?.touched"></i>
+                                    <i class="fa-solid fa-user" 
+                                        [class.green-icon]="this.formCliente.get('apellido')?.valid"
+                                        [class.red-icon]="this.formCliente.get('apellido')?.invalid && this.formCliente.get('apellido')?.touched"></i>
                                 </span>
                                 <input formControlName="apellido" maxlength="30" type="text" class="form-control" placeholder="apellido">
-                              </div>
-    
-                              <div class="row">
-                                  <div class="col-lg-7">
-                                    <div class="input-group input-group-lg mb-3">
-                                        <span class="input-group-text">
-                                            <i class="fa-solid fa-envelope"
-                                                [class.green-icon]="this.formCliente.get('correoelectronico')?.valid"
-                                                [class.red-icon]="this.formCliente.get('correoelectronico')?.invalid && this.formCliente.get('correoelectronico')?.touched"></i>
-                                        </span>
-                                        <input formControlName="correoelectronico" maxlength="50" type="text" class="form-control" placeholder="correo electronico">
-                                      </div>
-                                  </div>
-                                  <div class="col-lg-5">
-                                    <div class="input-group input-group-lg mb-3">
-                                        <span class="input-group-text">
-                                            <i class="fa-solid fa-globe"
-                                            [class.green-icon]="this.formCliente.get('pais')?.valid"
-                                            [class.red-icon]="this.formCliente.get('pais')?.invalid && this.formCliente.get('pais')?.touched"></i>
-                                        </span>
-                                        <input formControlName="pais"  maxlength="30" type="text" class="form-control" placeholder="pais">
-                                      </div>
-                                  </div>
-                              </div>
-                              <input formControlName="idCliente" type="hidden">
-                              <button [disabled]="this.formCliente.invalid" type="submit" class="btn btn-success btn-lg">
-                                <i class="fa-solid fa-database"></i>&nbsp; {{accion |uppercase}}</button>
+                            </div>
+                            <div *ngIf="formCliente.get('apellido')?.touched && formCliente.get('apellido')?.invalid">
+                                <small *ngIf="formCliente.get('apellido')?.errors?.['required']" class="text-danger feedback-text">El apellido es requerido.</small>
+                                <small *ngIf="formCliente.get('apellido')?.errors?.['minlength']" class="text-danger feedback-text">El apellido debe tener al menos 1 caracter.</small>
+                                <small *ngIf="formCliente.get('apellido')?.errors?.['maxlength']" class="text-danger feedback-text">El apellido puede tener hasta 30 caracteres.</small>
+                                <small *ngIf="formCliente.get('apellido')?.errors?.['pattern']" class="text-danger feedback-text">El apellido solo puede contener letras y espacios.</small>
+                            </div>
+
+                            <!-- Correo Electronico Campo -->
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-envelope" 
+                                        [class.green-icon]="this.formCliente.get('correoelectronico')?.valid"
+                                        [class.red-icon]="this.formCliente.get('correoelectronico')?.invalid && this.formCliente.get('correoelectronico')?.touched"></i>
+                                </span>
+                                <input formControlName="correoelectronico" maxlength="50" type="text" class="form-control" placeholder="correo electronico">
+                            </div>
+                            <div *ngIf="formCliente.get('correoelectronico')?.touched && formCliente.get('correoelectronico')?.invalid">
+                                <small *ngIf="formCliente.get('correoelectronico')?.errors?.['required']" class="text-danger feedback-text">El correo electrónico es requerido.</small>
+                                <small *ngIf="formCliente.get('correoelectronico')?.errors?.['email']" class="text-danger feedback-text">El correo electrónico no es válido.</small>
+                            </div>
+
+                            <!-- Pais Campo -->
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-globe" 
+                                        [class.green-icon]="this.formCliente.get('pais')?.valid"
+                                        [class.red-icon]="this.formCliente.get('pais')?.invalid && this.formCliente.get('pais')?.touched"></i>
+                                </span>
+                                <input formControlName="pais" maxlength="30" type="text" class="form-control" placeholder="pais">
+                            </div>
+                            <div *ngIf="formCliente.get('pais')?.touched && formCliente.get('pais')?.invalid">
+                                <small *ngIf="formCliente.get('pais')?.errors?.['required']" class="text-danger feedback-text">El país es requerido.</small>
+                                <small *ngIf="formCliente.get('pais')?.errors?.['minlength']" class="text-danger feedback-text">El país debe tener al menos 3 caracteres.</small>
+                                <small *ngIf="formCliente.get('pais')?.errors?.['maxlength']" class="text-danger feedback-text">El país puede tener hasta 30 caracteres.</small>
+                                <small *ngIf="formCliente.get('pais')?.errors?.['pattern']" class="text-danger feedback-text">El país solo puede contener letras y espacios.</small>
+                            </div>
+
+                            <input formControlName="idCliente" type="hidden">
+                            <button [disabled]="this.formCliente.invalid" type="submit" class="btn btn-success btn-lg">
+                                <i class="fa-solid fa-database"></i>&nbsp; {{accion | uppercase}}
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="col-lg-7">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card custom-font">
+                    <div class="card-body scrollable-container">
                         <h5 class="titulo">LISTA CLIENTES</h5>
                         <table class="table">
                             <tbody> 
@@ -75,7 +99,7 @@
                                     <td>{{cliente.pais }}</td>
                                     <td>{{cliente.correoElectronico }}</td>
                                     <td><i class="fas fa-user text-dark"></i></td>
-                                    <td><i (click)="editarCliente(cliente);" class="far fa-solid fa-pencil text-info"></i></td>
+                                    <td><i (click)="editarCliente(cliente);" class="far fa-solid fa-pencil text-green"></i></td>
                                     <td><i (click)="confirmarEliminacion(cliente.idCliente);" class="far fa-solid fa-trash-can text-danger"></i></td>
                                 </tr>
                             </tbody>
