@@ -35,6 +35,5 @@ export class ClienteService {
     console.log('Datos del cliente a actualizar:', cliente);
     return this.http.put(url, cliente);
   }
-  
-
+    
 }

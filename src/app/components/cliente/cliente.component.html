@@ -60,21 +60,21 @@
                                 <small *ngIf="formCliente.get('correoelectronico')?.errors?.['required']" class="text-danger feedback-text">El correo electrónico es requerido.</small>
                                 <small *ngIf="formCliente.get('correoelectronico')?.errors?.['email']" class="text-danger feedback-text">El correo electrónico no es válido.</small>
                             </div>
-
                             <!-- Pais Campo -->
                             <div class="input-group input-group-lg mb-3">
                                 <span class="input-group-text">
                                     <i class="fa-solid fa-globe" 
-                                        [class.green-icon]="this.formCliente.get('pais')?.valid"
-                                        [class.red-icon]="this.formCliente.get('pais')?.invalid && this.formCliente.get('pais')?.touched"></i>
+                                        [class.green-icon]="formCliente.get('pais')?.valid"
+                                        [class.red-icon]="formCliente.get('pais')?.invalid && formCliente.get('pais')?.touched"></i>
                                 </span>
-                                <input formControlName="pais" maxlength="30" type="text" class="form-control" placeholder="pais">
+                                <select formControlName="pais" class="form-control">
+                                    <option value="" disabled selected hidden>País</option>
+                                    <option value="" disabled>Seleccione un país</option>
+                                    <option *ngFor="let pais of paises" [value]="pais">{{ pais }}</option>
+                                </select>
                             </div>
                             <div *ngIf="formCliente.get('pais')?.touched && formCliente.get('pais')?.invalid">
                                 <small *ngIf="formCliente.get('pais')?.errors?.['required']" class="text-danger feedback-text">El país es requerido.</small>
-                                <small *ngIf="formCliente.get('pais')?.errors?.['minlength']" class="text-danger feedback-text">El país debe tener al menos 3 caracteres.</small>
-                                <small *ngIf="formCliente.get('pais')?.errors?.['maxlength']" class="text-danger feedback-text">El país puede tener hasta 30 caracteres.</small>
-                                <small *ngIf="formCliente.get('pais')?.errors?.['pattern']" class="text-danger feedback-text">El país solo puede contener letras y espacios.</small>
                             </div>
 
                             <input formControlName="idCliente" type="hidden">

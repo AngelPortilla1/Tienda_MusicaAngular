@@ -15,6 +15,7 @@ export class ClienteComponent implements OnInit {
   accion='Agregar';
   id:number | undefined
   loading = false; // Loader stat
+  paises: string[] = ['Argentina', 'Brasil', 'Chile', 'Colombia', 'Perú'];
 
   listaclientes: any[] =[
   ];
@@ -35,13 +36,28 @@ export class ClienteComponent implements OnInit {
       this.formCliente.markAllAsTouched();  // Marca todos los controles como "touched"
         return;
     }
+    const correo = this.formCliente.get('correoelectronico')?.value;
 
+    // Verificar si el correo ya existe en la lista de clientes, exceptuando el cliente que se está editando
+    const correoExiste = this.listaclientes.some(cliente => 
+      cliente.correoElectronico === correo && cliente.idCliente !== this.id
+    );
+
+    if (correoExiste) {
+      Swal.fire('Error', 'Ya existe un cliente con el mismo correo electrónico', 'error');
+      return;
+    }
+    this.guardarOActualizarCliente();
+  }
+
+  guardarOActualizarCliente(): void {
     let cliente: any = {
         nombre: this.formCliente.get('nombre')?.value,
         apellido: this.formCliente.get('apellido')?.value,
         correoelectronico: this.formCliente.get('correoelectronico')?.value,
         pais: this.formCliente.get('pais')?.value,
     };
+    
 
     if (this.accion === 'Editar') {
         cliente = {
@@ -49,6 +65,8 @@ export class ClienteComponent implements OnInit {
             idCliente: this.id // Agrega el idCliente al objeto cliente
         };
     }
+
+    
 
     if (this.accion === 'Agregar') {
         this._clienteService.guardarCliente(cliente).subscribe(data => {

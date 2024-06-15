@@ -83,7 +83,7 @@ input.ng-touched.ng-invalid {
 
 
 .btn:hover {
-    background-color: #0056b3; /* Color de fondo azul oscuro al pasar por encima */
+    background-color: #074786; /* Color de fondo azul oscuro al pasar por encima */
 }
 
 /* Asegura que todos los iconos tengan el mismo tamaño */
@@ -106,7 +106,20 @@ input.ng-touched.ng-invalid {
     max-height: 410px; 
     overflow-y: auto; 
 }
+.placeholder-option {
+    color: #6c757d; /* Color gris claro */
+}
 
+/* Estilo específico para el placeholder del select */
+.placeholder-option {
+    font-family: "Bebas Neue", sans-serif; /* Fuente específica para los campos de entrada */
+    border: 1px solid #ced4da; /* Borde gris */
+    border-radius: 5px; /* Esquinas redondeadas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    font-size: 20px; /* Tamaño de fuente */
+    padding: 10px;
+    color: #6c757d; /* Color gris claro */
+}
 
 
 
